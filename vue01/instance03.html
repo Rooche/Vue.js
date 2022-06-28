@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    let v1 = new Vue({
+      el : '#app',
+      data : {
+        myName : '',
+        myText : '오늘 하루는 어떠신가요?',
+ //       myCheck : '', //type에 checkbox값을 주면 boolean값을 준다
+        myCheck : true, //초기값을 true를 주면 체크가 된 상태로 true라고 나타난다
+        myhobbies : [],  //다수의 값이 들어기때문에 배열로 초기화 해준다.
+        raidoData : []
+      }
+    });
+  });
+</script>
+
+  <!-- 양방향으로 바인딩 : v-model , 실시간 업데이트같은 개념, 입력 값이 자동으로 뷰 데이터 속성에 연결된다 -->
+  <div id="app">
+    <input v-model="myName" placeholder="이름"> <!---->
+    <p>나는 {{ myName }} 입니다.</p>
+    <textarea v-model="myText"></textarea>
+    <p>문장은, [{{ myText }}]</p>
+    <p>문자수는 {{myText.length}} 자 입니다.</p>
+    <label>
+      <input type="checkbox" v-model="myCheck">
+      체크박스의 상태 값은 {{ myCheck }}
+    </label>
+    
+    <div> <!--체크박스는 복수선택 가능-->
+      <label><input type="checkbox" v-model="myhobbies" value="book">독서</label>
+      <label><input type="checkbox" v-model="myhobbies" value="movie">영화</label>
+      <label><input type="checkbox" v-model="myhobbies" value="writing">글쓰기</label>
+      <p> (체크박스)취미 : {{ myhobbies }} </p>
+    </div>
+    <div> <!--라디오버튼은 하나만 선택 가능 value에 어떤값을 넘겨줄껀지 정의해주면 됨-->
+      <label><input type="radio" v-model="raidoData" value="book">독서</label>
+      <label><input type="radio" v-model="raidoData" value="movie">영화</label>
+      <label><input type="radio" v-model="raidoData" value="writing">글쓰기</label>
+      <p> (라디오버튼)취미 : {{ raidoData }} </p>
+    </div>
+  </div>
+  <hr>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      let v2 = new Vue({
+        el : '#app2',
+        data : {
+          myAgree : false,
+          myColor : '' //밸류값이 없으면 텍스트값이 넘어간다.
+        }
+      });
+    });
+  </script>
+  <div id="app2"> <!--체크박스 클릭해야 버튼 활성화.-->
+    <label><input type="checkbox" v-model="myAgree">동의합니다.</button></label> <!--v-model로 값을 받아 즉시 업데이트되어 편하게 코드를 짤수있다.-->
+    <button v-bind:disabled="myAgree==false">송신</button>
+    <select v-model="myColor" multiple>
+      <option value="" disabled>색을 선택해주세요</option>
+      <option value="빨강">red</option>
+      <option value="초록">green</option>
+      <option value="파랑">blue</option>
+      <option value="주황">orange</option>
+      <option value="갈색">brown</option>
+    </select>
+  <!--  <p v-bind:style="{ color : myColor }">선택한 색상은{{ myColor }} 입니다</p> 글자색도 같이 변함.-->
+    <p>선택한 색상은 {{ myColor }} 입니다.</p>
+  </div>
+  <hr>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      let v3 = new Vue({
+        el : '#app3',
+        data : {
+          myText : '',
+          myNumber : '',
+          strData : ''
+        }
+      });
+    });
+  </script>
+
+  <div id="app3">
+    <!-- 실시간 업데이트를 막는 lazy -->
+    <!--enter 입력하거나 포커스가 이동 할 경우 연결된 프로퍼티에 값을 업데이트-->
+    <input v-model.lazy="myText">
+    <p>입력후 표시[{{ myText }}]</p>
+
+    <!-- 입력된 값의 타입을 숫자로 변경-->
+    <input v-model.number="myNumber">
+    <p>100을 더해 표시 [ {{ myNumber + 100 }} ]</p>
+
+    <!-- 입력된 데이터 앞뒤의 공백을 제거 -->
+    <input v-model.trim="strData">
+    <p>앞뒤 공백을 제거[{{strData}}]</p>
+
+  </div>
+</body>
+</html>

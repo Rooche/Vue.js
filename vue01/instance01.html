@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () { // DOM이 완전히 동작되고나서 작동하도록
+      //굳이 변수를 선언을 안해도 사용은 가능하다.
+      /*  new Vue({
+          //객체를 생성하고 나중에 필드를 추가하는걸 자바스크립트에서 했는데
+          //똑같이 최초에 선언 이후에 집어넣을수있다. 단 이렇게 할 경우 실시간 반응은 안됨
+          //데이터가 업데이트 되거나 수정해도 바뀌진 않아도 반영은 된다.
+          //실제로 인스턴스가 생성할때는 데이터가 필요없지만 나중에 사용할꺼면 미리 정의해둬야한다.
+          el : 'HTML 요소', //그냥 태그만 연결하는게 아니라 선택자를 이용해서 충분히 연결이 가능하다. id속성을 이용해서 사용한거처럼 el태그를 사용하여 선택자나 여러가지 문법적으로 사용이 가능하다.
+          //-> 사용하는 모든 데이터에 정의
+          data : '데이터에 대한 정보',
+          computed : '데이터를 연산', // 데이터는 원본이지만 computed는 그 데이터를 출력할때 어떤식으로 보여주는지 정의하는거
+          methods : '데이터 처리',
+          watch : '데이터를 감시' // 데이터 변경을 관찰하고 이에 반응하는 보다 일반적인 watch 속성
+    
+        }); */
+  
+  
+      //특정한 메소드를 가지고오기 위한 호출방법 -> 템플릿 문법
+      //템플릿 문법 : {{ }} -> render() 함수를 호출()한다 , html태그도 아니고 문자도 아닌 의미가 있는 부호.
+      let app = new Vue({
+        el: '#app',
+        data: {
+          //프로퍼티 (Properties)
+    //      myText: 'Hello ~!' // Vue.js에서 이중괄호 안에 있는건 데이터를 출력해주는거다.
+          myText: '<h1>Hello ~!</h1>' //이렇게 태그를 사용해서 출력해봐도 태그를 인식을 못함 . 출력결과 <h1>Hello ~!</h1>, 태그를 인식하게 하려면 v-html을 써야함.
+        }
+      });
+    });
+  </script>
+  <div id="app"> <!-- 연결하고자하는 태그를 하나 만들고 -->
+    <p>{{ myText }}</p>
+    <!-- 원래 html에서는 이중괄호{{}}는 의미가 없지만 Vue.js에서는 의미가 생긴다. 예로 head에 있는 script src를 삭제시 문자 그대로 출력되지만 Vue에선 다르다. -->
+    <!-- <p>{{ myText.replace('Hello', '안녕하세요') }}</p>  간단한건 이렇게 자바스크립트내에서 변경이 가능하다 -->
+    
+    <!-- 디렉티브 : 해당 요소에 대해 Vue가 실행할 명령어 접두어로( v- )이 보통 붙는다 -->
+    <p v-text="myText"></p> <!-- 단순히 텍스트를 출력할때 사용하는것 v-text -->
+    <p v-html="myText"></p> <!-- 태그를 인식하게 해줄때는 v-html -->
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      let app2 = new Vue ({
+        el : '#app2',
+        data : {
+          myNumber : 12345,
+          myText : 'vuejs',
+          myBoolean : true,
+          myArray : ['다즐링', '얼그레이', '실론'], //배열은 대괄호[] 형태
+          myObject : {
+            name : '홍차',
+            price : 100000
+          }
+        }
+      });
+    });
+  </script>
+  <div id="app2">
+    <p>{{ myNumber * 12345}}</p> <!-- 연산 가능 -->
+    <p>{{ myText + '를 배워보자'}}</p>
+    <p>{{ myBoolean }}</p>
+    <p>{{ myArray }}</p>
+    <p>{{ myArray[0] }}</p> <!-- 특정 배열만 출력하고싶을땐 인덱스값을 주면된다. -->
+    <p>{{ myObject }}</p> <!-- myObject 전체 출력 -->
+    <p>{{ myObject.name }} {{ myObject.price }}</p>
+    <p>{{ $data }}</p> <!-- data의 모든 값을 출력 -->
+  </div>
+</body>
+</html>

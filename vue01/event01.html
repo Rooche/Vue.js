@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function printMessage(){
+        alert("선택되었습니다.")
+      }
+
+      var v1 = new Vue({
+        el: '#app',
+        data: {
+          count: 0,
+          num : 0,
+          isClick : false
+        },
+        methods: { //여러개의 메소드를 등록할수있기에 복수로 칭해서 s
+          countUp : function(value){
+            //호출하는걸 왼쪽에 쓰고 구현해야하는건 펑션으로.
+            this.count+=Number(value); // 사라졌으니 신경 x->지금은 1씩 증가하는거니깐 ++(증가연산자)를 사용
+          },
+          oneClick : function (){
+            this.isClick = true;
+            printMessage();
+          }
+        }
+      });
+    });
+  </script>
+  <div id="app">
+    <p>{{ count }}</p>
+    <button v-on:click="countUp(1)">1씩 증가</button> <!-- on:다음에 등록하고자하자는 이벤트를 등록하고 클릭시 countUp이랑 연동되는것. -->
+    <button v-on:click="oneClick" v-bind:disabled="isClick">one Click</button> <!-- -->
+    <hr>
+    <label>증가 숫자 : <input v-model.number="num"></label><br>
+    <button v-on:click="countUp(num)">{{num}}씩 증가</button>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var v2 = new Vue({
+        el : '#app2',
+        data : {
+          myText : ''
+        },
+        methods : {
+          showAlert : function(){ //자바스크립트에서 쓴 펑션 그대로 쓰면 됨.
+            alert("enter키를 눌렀습니다.");
+          }
+        }
+      });
+    });
+  </script>
+  <div id="app2">
+      <input v-on:keyup.enter="showAlert" v-model.lazy="myText"> <!--특정키에 한에서만 이벤트가 되도록 지정할수있다.-->
+      <p>{{ myText }}</p>
+  </div>
+</body>
+
+</html>

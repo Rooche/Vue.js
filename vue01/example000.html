@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let v2 = new Vue({
+        el: 'div',
+        data: {
+          name: '',
+          address: '',
+          skill: [],
+          apply: [],
+          txt : ''
+        },
+        computed : {
+          skillList : function(){
+            let result = '';
+            for(let i=0; i<this.skill.length; i++){
+              result += this.skill[i] + ", "
+            }
+            return result;
+          }
+        }
+      })
+    })
+  </script>
+  <div>
+    <h1>입력폼 활용</h1>
+    <label>이름 : <input v-model="name"></label><br>
+    <label>주소 : <input v-model="address"></label><br>
+    <label>기술스택 <br>
+      <label>
+        <input type="checkbox" v-model="skill" value="자바">Java</input>
+      </label>
+      <label>
+        <input type="checkbox" v-model="skill" value="자바스크립트">Javascript</input>
+      </label>
+      <label>
+        <input type="checkbox" v-model="skill" value="c, c++">c, c++</input>
+      </label>
+      <label>
+        <input type="checkbox" v-model="skill" value="고">go</input>
+      </label>
+      <label>
+        <input type="checkbox" v-model="skill" value="파이썬">python</input>
+      </label>
+    </label><br>
+    <label>지원분야 :
+      <label>
+        <input type="radio" v-model="apply" value="프론트앤드">Front</input>
+      </label>
+      <label>
+        <input type="radio" v-model="apply" value="백앤드">Back</input>
+      </label>
+      <label>
+        <input type="radio" v-model="apply" value="풀스택">Full</input>
+      </label>
+    </label><br>
+    <textarea v-model="txt">
+    </textarea>
+    <hr>
+    <p>
+      <!-- 저는 홍길동이고 사는 곳은 어디이며, 기술스택은 무엇이고 지원분야는 뭐입니다. -->
+      저는 {{ name }}이고 사는 곳은 {{ address }}이며, 기술스택은 {{ skillList }}이고, 지원분야는 {{ apply }} 입니다.
+    </p>
+    <hr>
+    <ul>
+      <li>이름 : {{ name }} </li>
+      <li>주소 : {{ address }}</li>
+      <li>기술스택 : {{ skillList }}</li>
+      <li>지원분야 : {{ apply }}</li>
+      <li>자기소개 : {{ txt }}</li>
+    </ul>
+    <hr>
+    <table border ="1">
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>주소</th>
+          <th>기술스택</th>
+          <th>지원분야</th>
+          <th>자기소개</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ name }}</td>
+          <td>{{ address }}</td>
+          <td>{{ skillList }}</td>
+          <td>{{ apply }}</td>
+          <td>{{ txt }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+
+</html>

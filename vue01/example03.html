@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var v1 = new Vue({
+        el : '#aa',
+        data : {
+          num1 : 0,
+          num2 : 0
+        },
+        methods : {
+          countUp : function(value){
+            this.count+=Number(value);
+          }
+        }
+      });
+    });
+  </script>
+  <div id="aa">
+    <h1>간단한 계산기</h1>
+    <input type="number" v-model.number="num1">
+    <input type="number" v-model.number="num2">
+    <button v-on:click="countUp(num)">덧셈</button>
+    <button v-on:click="countDown(num)">뺄셈</button>
+    <button v-on:click="countmultiplication(num)">곱셈</button>
+    <button v-on:click="countDivision(num)">나눗셈</button>
+    <p></p>
+  </div>
+
+</body>
+</html>
