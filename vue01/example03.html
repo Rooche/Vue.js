@@ -14,12 +14,22 @@
       var v1 = new Vue({
         el : '#aa',
         data : {
-          num1 : 0,
-          num2 : 0
+          num1 : '',
+          num2 : '',
+          result : ''
         },
         methods : {
-          countUp : function(value){
-            this.count+=Number(value);
+          up : function(num1,num2){
+            this.result = num1 + num2
+          },
+          down : function(num1,num2){
+            this.result = num1 - num2
+          },
+          multiplication : function(num1,num2){
+            this.result = num1 * num2
+          },
+          division : function(num1,num2){
+            this.result = num1 / num2
           }
         }
       });
@@ -29,11 +39,11 @@
     <h1>간단한 계산기</h1>
     <input type="number" v-model.number="num1">
     <input type="number" v-model.number="num2">
-    <button v-on:click="countUp(num)">덧셈</button>
-    <button v-on:click="countDown(num)">뺄셈</button>
-    <button v-on:click="countmultiplication(num)">곱셈</button>
-    <button v-on:click="countDivision(num)">나눗셈</button>
-    <p></p>
+    <button v-on:click="up(num1,num2)">덧셈</button>
+    <button v-on:click="down(num1,num2)">뺄셈</button>
+    <button v-on:click="multiplication(num1,num2)">곱셈</button>
+    <button v-on:click="division(num1,num2)">나눗셈</button>
+    <p>결과는 {{ result }} 입니다.</p>
   </div>
 
 </body>
