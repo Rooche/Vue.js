@@ -12,24 +12,24 @@
   <script>
     document.addEventListener('DOMContentLoaded', function(){
       var v1 = new Vue({
-        el : '#aa',
+        el : '#aa', //div에 값이 없다면 그냥 'div' 라고 해도된다
         data : {
-          num1 : '',
-          num2 : '',
-          result : ''
+          num1 : 0,
+          num2 : 0,
+          result : 0
         },
         methods : {
-          up : function(num1,num2){
-            this.result = num1 + num2
+          up : function(){
+           this.result = this.num1 + this.num2
           },
-          down : function(num1,num2){
-            this.result = num1 - num2
+          down : function(){
+            this.result = this.num1 - this.num2
           },
-          multiplication : function(num1,num2){
-            this.result = num1 * num2
+          multiplication : function(){
+            this.result = this.num1 * this.num2
           },
-          division : function(num1,num2){
-            this.result = num1 / num2
+          division : function(){
+            this.result = this.num1 / this.num2
           }
         }
       });
@@ -38,11 +38,11 @@
   <div id="aa">
     <h1>간단한 계산기</h1>
     <input type="number" v-model.number="num1">
-    <input type="number" v-model.number="num2">
-    <button v-on:click="up(num1,num2)">덧셈</button>
-    <button v-on:click="down(num1,num2)">뺄셈</button>
-    <button v-on:click="multiplication(num1,num2)">곱셈</button>
-    <button v-on:click="division(num1,num2)">나눗셈</button>
+    <input type="number" v-model.number="num2"> <br>
+    <button v-on:click="up">덧셈</button>
+    <button v-on:click="down">뺄셈</button>
+    <button v-on:click="multiplication">곱셈</button>
+    <button v-on:click="division">나눗셈</button>
     <p>결과는 {{ result }} 입니다.</p>
   </div>
 
